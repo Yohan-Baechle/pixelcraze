@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,7 @@ class PostController extends Controller
     public function index()
     {
         // Affiche tous les articles
-        $posts = Post::all();
-        return response()->json($posts);
+        return PostResource::collection(Post::limit(5)->get());
     }
 
     public function show($id)
